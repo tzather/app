@@ -1,0 +1,10 @@
+.angular
+.git
+.vs
+bin
+dist
+Migrations
+node_modules
+obj
+TestResults
+tmp

@@ -1,0 +1,51 @@
+{
+  "files.exclude": {
+    "**/.angular": true,
+    "**/.git": true,
+    "**/bin": true,
+    "**/dist": true,
+    "**/node_modules": true,
+    "**/obj": true,
+    "**/package-lock.json": true,
+    "**/TestResults": true
+  },
+  "files.watcherExclude": {
+    "**/.angular": true,
+    "**/.git": true,
+    "**/bin": true,
+    "**/dist": true,
+    "**/node_modules": true,
+    "**/obj": true,
+    "**/package-lock.json": true,
+    "**/TestResults": true
+  },
+  "search.exclude": {
+    "**/.angular": true,
+    "**/.git": true,
+    "**/bin": true,
+    "**/dist": true,
+    "**/node_modules": true,
+    "**/obj": true,
+    "**/package-lock.json": true,
+    "**/TestResults": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true,
+    "source.sortMembers": true
+  },
+  "files.insertFinalNewline": true,
+  "prettier.arrowParens": "avoid",
+  "prettier.printWidth": 150,
+  "[csharp]": { "editor.defaultFormatter": "ms-dotnettools.csharp" },
+  "[html]": { "editor.defaultFormatter": "vscode.html-language-features" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" }
+}
