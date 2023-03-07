@@ -45,7 +45,8 @@
   "prettier.printWidth": 150,
   "[csharp]": { "editor.defaultFormatter": "ms-dotnettools.csharp" },
   "[html]": { "editor.defaultFormatter": "vscode.html-language-features" },
+  "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
   "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[ignore]": { "editor.defaultFormatter": "foxundermoon.shell-format" }
+  "[properties]": { "editor.defaultFormatter": "foxundermoon.shell-format" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" }
 }
