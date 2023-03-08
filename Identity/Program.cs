@@ -1,29 +1,15 @@
+using Zuhid.BaseApi;
+using Zuhid.Identity;
+
+// Services
 var builder = WebApplication.CreateBuilder(args);
+var appSetting = new AppSetting(builder.Configuration);
 
-// Add services to the container.
+builder.Services.AddBaseServices(appSetting.Name, appSetting.Version, appSetting.CorsOrigin);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+// app
 var app = builder.Build();
+app.UseBaseApp(appSetting.Name, appSetting.Version, appSetting.CorsOrigin, app.Environment);
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) {
-  app.UseSwagger();
-  app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-app.UseRouting();
-app.UseAuthorization();
-
-app.UseEndpoints(endpoints => {
-  // on the base page, show a simple message
-  endpoints.MapGet("/", async context => await context.Response.WriteAsync("<html><body style='padding:100px 0;text-align:center;font-size:xxx-large;'>Api is running<br/><br/><a href='/swagger'>View Swagger</a></body></html>"));
-  endpoints.MapControllers();
-});
-// app.MapControllers();
-
+// run
 app.Run();
