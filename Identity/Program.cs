@@ -10,6 +10,7 @@ var appSetting = new AppSetting(builder.Configuration);
 builder.Services.AddBaseServices(appSetting.Name, appSetting.Version, appSetting.CorsOrigin);
 builder.Services.AddDatabase<IdentityContext, IdentityContext>(appSetting.IdentityContext);
 builder.Services.AddIdentity<UserEntity, RoleEntity>().AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();
+builder.Services.AddTransient<SecurityService, SecurityService>();
 
 // app
 var app = builder.Build();

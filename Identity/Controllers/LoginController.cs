@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Zuhid.Identity.Entities;
 using Zuhid.Identity.Models;
 
 namespace Zuhid.Identity.Controllers;
 
 [ApiController]
+[AllowAnonymous]
 [Route("[controller]")]
 public class LoginController : ControllerBase {
-  private readonly UserManager<UserEntity> userManager;
+  private readonly SecurityService securityService;
 
-  public LoginController(UserManager<UserEntity> userManager) {
-    this.userManager = userManager;
+  public LoginController(SecurityService securityService) {
+    this.securityService = securityService;
   }
 
   [AllowAnonymous]
@@ -24,59 +23,52 @@ public class LoginController : ControllerBase {
   }
 
   [AllowAnonymous]
+  [HttpPost("AddUser")]
+  public async Task AddUser([FromBody] Login model) {
+    await securityService.AddUser(model.UserName, model.Password);
+  }
+
+
   [HttpGet("HashPassword")]
   public string HashPassword([FromBody] Login model) {
-    var userEntity = new UserEntity {
-      UserName = model.UserName
-    };
-    return userManager.PasswordHasher.HashPassword(userEntity, model.Password);
+    return securityService.HashPassword(model.Password);
   }
 
-  [AllowAnonymous]
   [HttpGet("VerifyPassword")]
-  public async Task<bool> VerifyPasswordAsync(string hashPassword) {
-    var userEntity = new UserEntity {
-      UserName = "admin@company.com"
-    };
-    userEntity.PasswordHash = userManager.PasswordHasher.HashPassword(userEntity, "P@ssw0rd");
-    return await userManager.CheckPasswordAsync(userEntity, "P@ssw0rd");
+  public bool VerifyPasswordAsync(string hashPassword) {
+    return securityService.VerifyPassword("admin@company.com", "P@ssw0rd", hashPassword);
   }
 
-  [AllowAnonymous]
   [HttpGet("EmailToken")]
   public async Task<string> EmailToken() {
-    var userEntity = new UserEntity {
-      UserName = "admin@company.com",
-      PasswordHash = "AQAAAAIAAYagAAAAEOUTIH/hC5Mt1IbBxleSaD/A8pUPj/mlVJJ0dTYAu0I5SaWHMdPxyLFfPBwGpi3gDg==",
-      Id = Guid.NewGuid(),
-      SecurityStamp = "DateTime.UtcNow.Ticks.ToString()"
-    };
-    return await userManager.GeneratePasswordResetTokenAsync(userEntity);
+    return await securityService.EmailToken("admin@company.com");
   }
 
-
-  [AllowAnonymous]
   [HttpGet("VerifyEmailToken")]
   public async Task<bool> VerifyEmailToken() {
-    var userEntity = new UserEntity {
-      UserName = "admin@company.com",
-      PasswordHash = "AQAAAAIAAYagAAAAEOUTIH/hC5Mt1IbBxleSaD/A8pUPj/mlVJJ0dTYAu0I5SaWHMdPxyLFfPBwGpi3gDg==",
-      Id = Guid.NewGuid(),
-      SecurityStamp = "DateTime.UtcNow.Ticks.ToString()"
-    };
-    return await userManager.VerifyUserTokenAsync(userEntity, "", "", "CfDJ8J0gITgZb2VIlbDPsSK3+IGL496uUZ6NJMtLHHXlIBnprpgaDVwonuIcQFN78Cb2SCwZvgRi/8DSaEi4FgvHTjW7RLW7hv35DugvRgVC0i7mjKosBCAVG0bqCQ2ZM+ogNbjPV/LYxCNQcqUdqbypcZF9d17/+v+ZRSzHg+lfmStRKX0LKWYULjg3o9VR5lJtrB95NbwzmMp3JuqV7SlEdE6jwANNbvzYp0rlaoSkOwmf");
+    var token = "CfDJ8J0gITgZb2VIlbDPsSK3+IGwWirao8TDCUFPIEUIOpNGfxQW7heOil6lVMVOoZTKEGNJZAs7H2Qv5kQMcVIF0UFv8+MuJsHuNwBTANF/VJK8ZFSrSXa8GUUdzDgXOybr1IS8sRyk9eB7IkYvFF2Ibh068pKluBNfPjVqTIrT7k+ESTIX72SwkarpT1yr3c17au+WgYnIYG6wa3FBbLRQrIgdQz8mB76lDBYhQLcgKgGKYpVDXEjSk0Ki+dII2m1BRQ==";
+    return await securityService.VerifyEmailToken("admin@company.com", token);
   }
 
   [AllowAnonymous]
-  [HttpGet("TotpToken")]
-  public async Task<string> TotpToken() {
-    var userEntity = new UserEntity {
-      UserName = "admin@company.com",
-      PasswordHash = "AQAAAAIAAYagAAAAEOUTIH/hC5Mt1IbBxleSaD/A8pUPj/mlVJJ0dTYAu0I5SaWHMdPxyLFfPBwGpi3gDg==",
-      Id = Guid.NewGuid(),
-      SecurityStamp = "DateTime.UtcNow.Ticks.ToString()"
-    };
-    return await userManager.GenerateChangePhoneNumberTokenAsync(userEntity, "7207207200");
+  [HttpGet("PhoneToken")]
+  public async Task<string> PhoneToken() {
+    return await securityService.PhoneToken("admin@company.com");
   }
 
+  [HttpGet("VerifyPhoneToken")]
+  public async Task<bool> VerifyPhoneToken() {
+    return await securityService.VerifyPhoneToken("admin@company.com", "417175");
+  }
+
+
+  [HttpGet("TfaToken")]
+  public async Task<string> TfaToken() {
+    return await securityService.TfaToken("admin@company.com");
+  }
+
+  [HttpGet("VerifyTfaToken")]
+  public async Task<bool> VerifyTfaToken() {
+    return await securityService.VerifyTfaToken("admin@company.com", "805835");
+  }
 }

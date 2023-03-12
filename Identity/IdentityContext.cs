@@ -7,4 +7,11 @@ namespace Zuhid.Identity;
 
 public class IdentityContext : IdentityDbContext<UserEntity, RoleEntity, Guid>, IContext {
   public IdentityContext(DbContextOptions<IdentityContext> options) : base(options) { }
+
+  protected override void OnModelCreating(ModelBuilder builder) {
+    base.OnModelCreating(builder);
+
+    // Data Seeding
+    builder.LoadData<UserEntity>();
+  }
 }
