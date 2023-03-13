@@ -17,6 +17,8 @@ clear
 
 # curl --request 'get' 'http://localhost:18001/Login/VerifyPhoneToken' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
 
-curl --request 'get' 'http://localhost:18001/Login/VerifyTfaToken' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
+# curl --request 'get' 'http://localhost:18001/Login/VerifyTfaToken' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
+
+curl --request 'get' 'http://localhost:18001/Login/TfaUrlToken' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
 
 echo ""

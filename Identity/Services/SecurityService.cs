@@ -87,4 +87,17 @@ public class SecurityService {
     }
     return false;
   }
+
+  public async Task<string> TfaUrlToken(string email) {
+    var token = string.Empty;
+    var userEntity = await userManager.FindByEmailAsync(email);
+
+    if (userEntity != null) {
+      // _ = await userManager.ResetAuthenticatorKeyAsync(userEntity);
+      token = await userManager.GetAuthenticatorKeyAsync(userEntity);
+    }
+    var provider = "aspnetprovider";
+    return $"otpauth://totp/{provider}:{userEntity?.Email}?secret={token}#issuer{provider}&digit=6" ?? string.Empty;
+  }
 }
+

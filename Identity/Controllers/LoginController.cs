@@ -71,4 +71,9 @@ public class LoginController : ControllerBase {
   public async Task<bool> VerifyTfaToken() {
     return await securityService.VerifyTfaToken("admin@company.com", "805835");
   }
+
+  [HttpGet("TfaUrlToken")]
+  public async Task<string> TfaUrlToken() {
+    return await securityService.TfaUrlToken("admin@company.com");
+  }
 }
