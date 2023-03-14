@@ -16,3 +16,7 @@ Has shared functionality for all Api projects
 ## Identity
 
 Use to authenticate and authorize users
+
+## Web
+
+ng new --skip-git --skip-install --directory . --strict --prefix nc identity

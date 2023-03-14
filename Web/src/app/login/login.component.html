@@ -1,0 +1,5 @@
+<div zc="card" header="Login" submit="Login" (submitClick)="login()">
+  <zc-text [(ngModel)]="model.username" field="email" label="Email"></zc-text>
+  <zc-text [(ngModel)]="model.password" field="password" type="password" label="Password"></zc-text>
+  <zc-checkbox [(ngModel)]="model.rememberMe" field="rememberMe" label="Remember Me"></zc-checkbox>
+</div>

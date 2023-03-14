@@ -3,7 +3,7 @@ clear
 # curl --verbose --request 'post' 'http://localhost:18001/Login/AddUser' --header 'Content-Type: application/json' --data '{ "username": "Qadmin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
 
 # Login
-# curl --verbose --request 'post' 'http://localhost:18001/Login' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
+curl --verbose --request 'post' 'http://localhost:18001/login' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
 
 # curl --request 'get' 'http://localhost:18001/Login/HashPassword' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
 
@@ -19,6 +19,6 @@ clear
 
 # curl --request 'get' 'http://localhost:18001/Login/VerifyTfaToken' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
 
-curl --request 'get' 'http://localhost:18001/Login/TfaUrlToken' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
+# curl --request 'get' 'http://localhost:18001/Login/TfaUrlToken' --header 'Content-Type: application/json' --data '{ "username": "admin@company.com", "password": "P@ssw0rd", "rememberMe": true }'
 
 echo ""

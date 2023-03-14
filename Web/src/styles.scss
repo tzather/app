@@ -1,0 +1,27 @@
+@use "/node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+  background-color: #eef1f3;
+}
+.card {
+  margin: 10px;
+}
+table {
+  @extend .table;
+}
+input[type="text"],
+input[type="password"],
+input[type="date"] {
+  @extend .form-control;
+}
+input[type="checkbox"] {
+  @extend .form-check-input;
+  margin: auto;
+  display: flex;
+}
+select {
+  @extend .form-select;
+}
+input[ng-reflect-typeahead] {
+  @extend .form-control;
+}

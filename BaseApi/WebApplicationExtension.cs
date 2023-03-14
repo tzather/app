@@ -7,7 +7,11 @@ public static class WebApplicationExtension {
     }
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseCors(corsOrigin);
+    app.UseCors(builder => builder
+     .AllowAnyOrigin()
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+    );
     app.UseRouting();
     app.UseAuthentication();
     app.UseAuthorization();
